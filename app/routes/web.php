@@ -69,3 +69,10 @@ Route::get('/information', function(){
 Route::get('/contacts', function(){
     return view('contacts');
 })->name('contacts');
+
+
+
+Route::get('/test', function(){
+    echo 'da';
+})->middleware('isAdmin');
+

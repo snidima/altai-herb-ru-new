@@ -10,8 +10,6 @@ class Category extends Model
 
     public function getAllCategorys(){
 
-//        $root = $this->where('parent_id', '=', null)->select('id')->first();
-
         $res = $this->where('parent_id', '=', 1)->select('title','id')->get();
 
         return  $res;

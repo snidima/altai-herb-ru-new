@@ -60,13 +60,15 @@ class LoginController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        $user = User::create([
+        $user = (new User())->createUser([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
         ]);
 
-        return redirect(route('main'));
+        Auth::login($user);
+
+        return redirect(route('profile'));
     }
 
 }
