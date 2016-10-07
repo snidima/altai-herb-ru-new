@@ -1,0 +1,66 @@
+/*LARAVEL STYLES*/
+.full-height {
+    height: 100vh;
+    background: url('../images/bg.jpg');
+    background-size: cover;
+    position: relative;
+    z-index:3;
+}
+
+.full-height:before{
+    content: '';
+    display: block;
+    position: absolute;
+    left:0;
+    top:0;
+    right: 0;
+    bottom:0;
+    background: rgba(67, 42, 25, 0.43);
+    z-index:-1;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index:10;
+}
+
+.position-ref {
+    position: relative;
+    z-index:10;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 130px;
+    font-weight: 800;
+    font-family: 'Open Sans Condensed', sans-serif;
+    text-shadow: 0 0 30px rgba(0,0,0,.2);
+    color: #fff;
+}
+
+.links > a {
+    color: #fff;
+    padding: 0 25px;
+    font-size: 14px;
+    letter-spacing: .05rem;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+}
+
+.m-b-md {
+    margin-bottom: 10px;
+}
+/*--//LARAVEL STYLES*/
