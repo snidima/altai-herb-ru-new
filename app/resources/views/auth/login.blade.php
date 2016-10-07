@@ -18,7 +18,7 @@
             {!! csrf_field() !!}
             <div class="enter__row">
                 <div class="enter__col">
-                    <label>Email:</label>
+                    <label>Email:!</label>
                 </div>
                 <div class="enter__col">
                     <input type="email" name="email" id="email" value="{{ old('email') }}" />
