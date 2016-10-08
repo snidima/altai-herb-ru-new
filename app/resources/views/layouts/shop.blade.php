@@ -114,5 +114,7 @@
     </div>
 </div>
 <footer></footer>
+
+@include('layouts/js/all')
 </body>
 </html>

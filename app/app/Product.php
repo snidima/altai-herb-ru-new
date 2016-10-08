@@ -3,19 +3,34 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \App\ProductOption;
 
 class Product extends Model
 {
     protected $table = 'products';
+//    protected $with = array('options');
 
 
-    public function getAllProducts()
+    public function options()
     {
-        $res = $this->get();
-        return  $res;
+        return $this->hasMany('App\ProductOption');
     }
 
 
+//    public function getOptions()
+//    {
+//        $prod = Product::find(1);
+//        $res = $prod->options()->get();
+//        return $res;
+//    }
+
+    public function getAllProducts()
+    {
+        $res = $this->with(['options' => function($q){
+            $q->where('slug','=','weight');
+        }])->has('options')->get();
+        return  $res;
+    }
 
 
     public function getInCategory( $id )
@@ -23,7 +38,6 @@ class Product extends Model
         $cat = Category::find( $id );
         $products = $cat->products()->get();
         return $products;
-
     }
 
 }

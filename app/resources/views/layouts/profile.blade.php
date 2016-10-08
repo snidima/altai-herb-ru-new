@@ -18,5 +18,6 @@
     </div>
 </div>
 
+@include('layouts/js/all')
 </body>
 </html>

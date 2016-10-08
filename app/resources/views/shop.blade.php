@@ -26,12 +26,9 @@
                     <div class="shop-herb-weight">
                         <div class="shop-filter-select-box el-fluid">
                             <select class="el-fluid">
-                                <option>150 гр</option>
-                                <option>250 гр</option>
-                                <option>500 гр</option>
-                                <option>1 кг</option>
-                                <option>2 кг</option>
-                                <option>5 кг</option>
+                                @foreach ($product->options as $option)
+                                    <option>{{$option->value}} {{$option->value_name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

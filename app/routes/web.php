@@ -73,6 +73,7 @@ Route::get('/contacts', function(){
 
 
 Route::get('/test', function(){
-    echo 'da';
+    echo'<pre>';
+    dd((new \App\Product())->getAllProducts());
 })->middleware('isAdmin');
 

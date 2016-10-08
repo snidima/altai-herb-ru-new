@@ -14,5 +14,6 @@
 
     @yield('content')
 </div>
+@include('layouts/js/all')
 </body>
 </html>
