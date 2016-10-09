@@ -30,8 +30,17 @@
             @endif
         </div>
         <div class="header-menu-line-bottom"></div>
-        <div class="header-right-bottom"><a href="#" class="header-right-bottom-cart">
-                <div class="header-right-bottom-cart__img"><img src="{{asset('images/cart.png')}}"/></div>
-                <div class="header-right-bottom-cart__text">0 руб.</div></a></div>
+        <div class="header-right-bottom" id="cart-mini">
+            <script id="cart-mini-tmp" type="x-tmpl-mustache">
+                <div class="header-right-bottom-cart">
+                    <div class="header-right-bottom-cart__img">
+                        <a href="{{route('cart')}}">
+                            <img src="{{asset('images/cart.png')}}"/>
+                        </a>
+                    </div>
+                    <div class="header-right-bottom-cart__text">@{{sum}} руб. <span id="cart-clear">( очистить )</span></div>
+                </div>
+          </script>
+        </div>
     </div>
 </header>

@@ -24,11 +24,18 @@ class Product extends Model
 //        return $res;
 //    }
 
+
+
     public function getAllProducts()
     {
+        return $this->getWidthOptions();
+    }
+
+    public function getWidthOptions()
+    {
         $res = $this->with(['options' => function($q){
-            $q->where('slug','=','weight');
-        }])->has('options')->get();
+            $q->where('slug','=','weight')->orderBy('value', 'desc');
+        }])->get();
         return  $res;
     }
 

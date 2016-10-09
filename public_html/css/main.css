@@ -450,6 +450,10 @@ a {
   .shop-herb__wrap:nth-last-of-type(1), .shop-herb__wrap:nth-last-of-type(2), .shop-herb__wrap:nth-last-of-type(3) {
     padding-bottom: 0; }
 
+.shop-herb[data-in-cart="true"] {
+  background: rgba(199, 255, 180, 0.5);
+}
+  
 .shop-herb-tegs {
   position: absolute;
   top: 0;
@@ -572,3 +576,7 @@ a {
 footer {
   height: 500px;
   background: #303030; }
+
+#cart-clear{
+
+}

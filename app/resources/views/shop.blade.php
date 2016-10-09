@@ -3,7 +3,7 @@
 @section('content')
     @foreach ($products as $product)
         <div class="shop-herb__wrap">
-            <div class="shop-herb">
+            <div class="shop-herb" >
                 <div class="shop-herb__title">{{$product->name}}</div>
                 <div style="background-image: url(http://prodgid.ru/wp-content/uploads/2014/12/%D0%9C%D1%8F%D1%82%D0%B0-%D0%BF%D0%B5%D1%80%D0%B5%D1%87%D0%BD%D0%B0%D1%8F-2.jpg)" class="shop-herb__image"><img title="ete" src="http://prodgid.ru/wp-content/uploads/2014/12/%D0%9C%D1%8F%D1%82%D0%B0-%D0%BF%D0%B5%D1%80%D0%B5%D1%87%D0%BD%D0%B0%D1%8F-2.jpg"/>
                     <div class="shop-herb-tegs">
@@ -38,7 +38,11 @@
                 </div>
                 <div class="shop-herb__line">
                     <div class="shop-herb-add">
-                        <button data-active="true" class="btn-1 btn-medium btn-trans el-fluid">в корзину</button>
+                        <button data-active="true" class="add-to-cart btn-1 btn-medium btn-trans el-fluid"
+                                data-id="{{$product->id}}"
+                                data-price="{{$product->price}}"
+                                data-image="http://prodgid.ru/wp-content/uploads/2014/12/%D0%9C%D1%8F%D1%82%D0%B0-%D0%BF%D0%B5%D1%80%D0%B5%D1%87%D0%BD%D0%B0%D1%8F-2.jpg"
+                        > в корзину </button>
                     </div>
                     <div class="shop-herb-price">
                         <div class="shop-herb__price-old">175 руб.</div>
@@ -49,3 +53,5 @@
         </div>
     @endforeach
 @endsection
+
+

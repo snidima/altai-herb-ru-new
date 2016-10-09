@@ -77,3 +77,8 @@ Route::get('/test', function(){
     dd((new \App\Product())->getAllProducts());
 })->middleware('isAdmin');
 
+
+
+Route::get('/cart', function(){
+    return view('cart');
+})->name('cart')->middleware('isAdmin');
