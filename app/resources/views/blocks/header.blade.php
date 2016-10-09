@@ -38,7 +38,7 @@
                             <img src="{{asset('images/cart.png')}}"/>
                         </a>
                     </div>
-                    <div class="header-right-bottom-cart__text">@{{sum}} руб. <span id="cart-clear">( очистить )</span></div>
+                    <div class="header-right-bottom-cart__text">@{{sum}} руб. <span id="cart-clear">X</span></div>
                 </div>
           </script>
         </div>
