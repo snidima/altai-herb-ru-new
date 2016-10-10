@@ -15,7 +15,9 @@ var Workspace = Backbone.Router.extend({
         cartCustomerView.render();
     },
     check: function(){
-        cartCheckView.render();
+        if ( cartCustomer.get('next') ) {
+            cartCheckView.render();
+        }
     }
 
 });

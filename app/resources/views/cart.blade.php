@@ -60,33 +60,69 @@
                 <span class="btn-1 btn-medium btn-orange" style="display: inline-block" onclick="workspace.navigate('', {trigger: true});">
                     Назад
                 </span>
+                @{{ #next }}
                 <span class="btn-1 btn-medium btn-orange" style="display: inline-block" onclick="workspace.navigate('check', {trigger: true});">
                     Далее
                 </span>
+                @{{ /next }}
             </h2>
             <div class="cart-table">
-
+                <h2>Данные заказчика</h2>
                 <div class="cart-customer">
                     <div class="cart-customer__row">
-                         <div class="cart-customer__col"><label for="">Ваше имя</label></div>
-                         <div class="cart-customer__col"><input type="text" /></div>
+                         <div class="cart-customer__col"><label for="name">Ваше имя</label></div>
+                         <div class="cart-customer__col">
+                            <input type="text" name="name" id="name" value="@{{name}}" />
+                            <div class="input-error"></div>
+                         </div>
                     </div>
                     <div class="cart-customer__row">
-                         <div class="cart-customer__col"><label for="">Ваше фамилия</label></div>
-                         <div class="cart-customer__col"><input type="text" /></div>
+                         <div class="cart-customer__col"><label for="surname">Ваше фамилия</label></div>
+                         <div class="cart-customer__col">
+                            <input type="text" name="surname" id="surname" value="@{{surname}}"/>
+                            <div class="input-error"></div>
+                         </div>
                     </div>
                     <div class="cart-customer__row">
-                         <div class="cart-customer__col"><label for="">Номер телефона</label></div>
-                         <div class="cart-customer__col"><input type="text" /></div>
+                         <div class="cart-customer__col"><label for="telephone">Номер телефона</label></div>
+                         <div class="cart-customer__col"><input type="text" id="telephone" name="telephone" value="@{{telephone}}" /><div class="input-error"></div></div>
                     </div>
                     <div class="cart-customer__row">
-                         <div class="cart-customer__col"><label for="">Email</label></div>
-                         <div class="cart-customer__col"><input type="text" /></div>
+                         <div class="cart-customer__col"><label for="email">Email</label></div>
+                         <div class="cart-customer__col"><input type="text" name="email" id="email" value="@{{email}}" /><div class="input-error"></div></div>
                     </div>
+                    <div class="cart-customer__row">
+                         <div class="cart-customer__col"><label for="region">Область/Регион/Край</label></div>
+                         <div class="cart-customer__col"><input type="text" name="region" id="region" value="@{{region.name}}" /><div class="input-error"></div></div>
+                    </div>
+
+                    <div class="cart-customer__row">
+                         <div class="cart-customer__col"><label for="city">Город/Поселок/Село</label></div>
+                         <div class="cart-customer__col"><input type="text" name="city" id="city" value="@{{city.name}}" @{{^region}} disabled @{{/region}} /><div class="input-error"></div></div>
+                    </div>
+
+                    <div class="cart-customer__row">
+                         <div class="cart-customer__col"><label for="street">Адрес</label></div>
+                         <div class="cart-customer__col"><input type="text" name="street" id="street" value="@{{street.name}}" @{{^city}} disabled @{{/city}}/><div class="input-error"></div></div>
+                    </div>
+
+                    <div class="cart-customer__row">
+                         <div class="cart-customer__col"><label for="street">Дом/Корпус</label></div>
+                         <div class="cart-customer__col"><input type="text" name="building" id="building" value="@{{building.name}}" @{{^street}} disabled @{{/street}} /><div class="input-error"></div></div>
+                    </div>
+
+                    <div class="cart-customer__row">
+                         <div class="cart-customer__col"><label for="apartment">Квартира</label></div>
+                         <div class="cart-customer__col"><input type="text" name="apartment" id="apartment" value="@{{apartment}}" @{{^building}} disabled @{{/building}} /><div class="input-error"></div></div>
+                    </div>
+
                 </div>
 
-            </div>
-        </script>
+
+
+
+</div>
+</script>
 
         <script id="cart-check-tmp" type="x-tmpl-mustache">
             <h2 class="cart-step-title">

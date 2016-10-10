@@ -70,3 +70,38 @@ var CartSum = Backbone.Model.extend({
         this.set({sum: sum});
     }
 });
+
+
+
+
+
+var CartCustomer = Backbone.Model.extend({
+    defaults: function(){
+        return {
+            name: '',
+            surname: '',
+            telephone: '',
+            email: '',
+            region: '',
+            city: '',
+            street: '',
+            building: '',
+            apartment: '',
+            next: false
+        }
+    },
+
+    initialize: function(){
+        this.on('change', function(){
+            console.log( this.toJSON() );
+            localStorage.setItem("cartCustomer", JSON.stringify(this.toJSON()));
+            var data = this.toJSON();
+            if ( data.name != '' && data.surname != '' && data.email != '' && data.telephone != '' ){
+                this.set({next: true})
+            } else {
+                this.set({next: false})
+            }
+        });
+    },
+});
+
