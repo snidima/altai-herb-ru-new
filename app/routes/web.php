@@ -81,4 +81,4 @@ Route::get('/test', function(){
 
 Route::get('/cart', function(){
     return view('cart');
-})->name('cart')->middleware('isAdmin');
+})->name('cart');
