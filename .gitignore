@@ -1,7 +1,7 @@
 /app/node_modules
 /app/public/storage
 /app/vendor
-/app/.idea/
+/app/.idea
 /app/Homestead.json
 /app/Homestead.yaml
 /app/.env
