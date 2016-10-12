@@ -3,27 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use \App\ProductOption;
+
+
 
 class Product extends Model
 {
     protected $table = 'products';
-//    protected $with = array('options');
 
 
-    public function options()
-    {
-        return $this->hasMany('App\ProductOption');
+
+    public function categories() {
+        return $this->belongsToMany('App\Category', 'products_categorys', 'product_id', 'category_id');
     }
 
 
-//    public function getOptions()
-//    {
-//        $prod = Product::find(1);
-//        $res = $prod->options()->get();
-//        return $res;
-//    }
-
+    public function characteristics() {
+        return $this->belongsToMany('App\Characteristic', 'characteristic_product', 'id_product', 'id_characteristic')->withTimestamps();
+    }
 
 
     public function getAllProducts()
@@ -46,6 +42,8 @@ class Product extends Model
         $products = $cat->products()->get();
         return $products;
     }
+
+
 
 }
 

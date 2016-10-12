@@ -26,8 +26,8 @@
                     <div class="shop-herb-weight">
                         <div class="shop-filter-select-box el-fluid">
                             <select class="el-fluid">
-                                @foreach ($product->options as $option)
-                                    <option>{{$option->value}} {{$option->value_name}}</option>
+                                @foreach ($product->characteristics as $characteristic)
+                                    <option>{{$characteristic->value}} {{$characteristic->units->unit}}</option>
                                 @endforeach
                             </select>
                         </div>

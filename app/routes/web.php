@@ -72,10 +72,7 @@ Route::get('/contacts', function(){
 
 
 
-Route::get('/test', function(){
-    echo'<pre>';
-    dd((new \App\Product())->getAllProducts());
-})->middleware('isAdmin');
+Route::get('/test', 'ProductController@loloo')->middleware('isAdmin');
 
 
 

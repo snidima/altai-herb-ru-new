@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="cart-customer__row">
-                         <div class="cart-customer__col"><label for="street">Адрес</label></div>
+                         <div class="cart-customer__col"><label for="street">Улица</label></div>
                          <div class="cart-customer__col"><input type="text" name="street" id="street" value="@{{street.name}}" @{{^city}} disabled @{{/city}}/><div class="input-error"></div></div>
                     </div>
 
@@ -124,17 +124,17 @@
 </div>
 </script>
 
-        <script id="cart-check-tmp" type="x-tmpl-mustache">
-            <h2 class="cart-step-title">
-                Шаг 3 из 3. Проверка заказа
-                <span class="btn-1 btn-medium btn-orange" style="display: inline-block" onclick="workspace.navigate('customer', {trigger: true});">
-                    Назад
-                </span>
-            </h2>
-            <div class="cart-table">
-                Проверкад анных корзины
-            </div>
-        </script>
+<script id="cart-check-tmp" type="x-tmpl-mustache">
+    <h2 class="cart-step-title">
+        Шаг 3 из 3. Проверка заказа
+        <span class="btn-1 btn-medium btn-orange" style="display: inline-block" onclick="workspace.navigate('customer', {trigger: true});">
+            Назад
+        </span>
+    </h2>
+    <div class="cart-table">
+        Проверкад анных корзины
+    </div>
+</script>
 
     </div>
     
