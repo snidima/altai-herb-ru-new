@@ -79,3 +79,26 @@ Route::get('/test', 'ProductController@loloo')->middleware('isAdmin');
 Route::get('/cart', function(){
     return view('cart');
 })->name('cart');
+
+
+
+
+Route::group([ 'middleware' => 'isAdmin', 'prefix'=>'admin'], function()
+{
+    Route::get('/', 'AdminController@dashboard');
+
+    Route::group(['prefix'=>'api'], function()
+    {
+        Route::get('/products', function (){
+            $prods = App\Product::first()
+                ->with('categories')
+                ->with('characteristics')
+                ->with('characteristics.units')
+                ->get();
+
+            return Response::json( $prods );
+        });
+
+    });
+
+});

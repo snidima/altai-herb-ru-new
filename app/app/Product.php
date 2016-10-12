@@ -18,7 +18,7 @@ class Product extends Model
 
 
     public function characteristics() {
-        return $this->belongsToMany('App\Characteristic', 'characteristic_product', 'id_product', 'id_characteristic')->withTimestamps();
+        return $this->belongsToMany('App\Characteristic', 'characteristic_product', 'id_product', 'id_characteristic');
     }
 
 

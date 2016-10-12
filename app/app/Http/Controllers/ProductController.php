@@ -22,7 +22,11 @@ class ProductController extends Controller
 //        dd($products->getAllProducts());
 
         return view('shop', [
-            'products' => $products->getAllProducts(),
+            'products' => Product::has('characteristics')
+//            ->has('categories')
+                ->with('characteristics')
+                ->with('characteristics.units')
+                ->get(),
             'categories' => $category->getAllCategorys()
         ]);
     }
