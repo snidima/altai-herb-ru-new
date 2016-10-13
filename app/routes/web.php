@@ -90,14 +90,73 @@ Route::group([ 'middleware' => 'isAdmin', 'prefix'=>'admin'], function()
     Route::group(['prefix'=>'api'], function()
     {
         Route::get('/products', function (){
-            $prods = App\Product::first()
-                ->with('categories')
-                ->with('characteristics')
-                ->with('characteristics.units')
-                ->get();
+            $products = App\Product::first()
 
-            return Response::json( $prods );
+                ->with(['categories'=>function($q){
+                    $q->orderBy('id','desc');
+                }])
+
+                ->with(['characteristics'=>function($q){
+                    $q->with(['units'=>function($q){
+                        $q->where('slug','=', 'weight');
+                    }])
+
+                        ->orderBy('id','desc');
+                }]);
+
+                ;
+
+            return Response::json( $products->get()->toArray() );
         });
+
+
+        Route::put('/product', function ( \Illuminate\Http\Request $request){
+
+            $newProd = \App\Product::firstOrCreate([
+                'name' => $request->name,
+                'desc'=> $request->desc,
+                'price' => $request->price,
+            ]);
+
+            $newProd->categories()->attach($request->cats);
+
+            $newProd->characteristics()->attach($request->characteristics);
+
+            return Response::json( ['ok'] );
+        });
+
+
+        Route::get('/characteristics', function (){
+            $characteristics = \App\Characteristic
+                ::with(['units'=>function($q){
+
+                }]);
+
+            $cats = \App\Category::all()
+                ->where('title','<>','root');
+
+
+            return Response::json( [
+                'characteristics' => $characteristics->get()->toArray(),
+                'cats' => $cats->toArray(),
+            ] );
+        });
+
+    });
+
+    Route::get('/add', function(){
+
+        $newProd = \App\Product::firstOrCreate([
+            'name' => 'test',
+            'desc'=> 'desc',
+            'price' => '666',
+        ]);
+        $newProd->characteristics()->attach([1,2,3]);
+
+        dd(
+//            $prod
+        );
+
 
     });
 
