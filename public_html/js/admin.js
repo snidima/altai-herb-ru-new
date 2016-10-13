@@ -172,8 +172,8 @@ $('#refreshProducts').click(function(){
     loadDeffaultValues();
 });
 
-//
-// loadProduct();
-// loadDeffaultValues();
+
+loadProduct();
+loadDeffaultValues();
 
 
