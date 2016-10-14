@@ -118,12 +118,22 @@ Route::group([ 'middleware' => 'isAdmin', 'prefix'=>'admin'], function()
                 'price' => $request->price,
             ]);
 
-            $newProd->categories()->attach($request->cats);
+            $newProd->categories()->attach($request->categories);
 
             $newProd->characteristics()->attach($request->characteristics);
 
             return Response::json( ['ok'] );
         });
+
+        Route::delete('/product', function ( \Illuminate\Http\Request $request){
+            $prod = \App\Product::find($request->id);
+            $prod->categories()->detach();
+            $prod->characteristics()->detach();
+            $prod->delete();
+            return Response::json( 'ok' );
+        });
+
+
 
 
         Route::get('/characteristics', function (){

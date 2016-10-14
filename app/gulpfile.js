@@ -15,5 +15,8 @@ require('laravel-elixir-vue');
 
 elixir(mix => {
     mix.sass('app.scss')
-       .webpack('app.js');
+    mix.browserSync({
+        proxy: 'altai-herb.local'
+    })
+       // .webpack('app.js');
 });

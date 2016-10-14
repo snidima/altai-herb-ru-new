@@ -105,7 +105,7 @@
                                <a class="dropdown-item " href="#"><i class="fa fa-pencil" aria-hidden="true"></i> Редактировать</a>
                                <a class="dropdown-item disabled" href="#"><i class="fa fa-toggle-on text-primary" aria-hidden="true"></i> Отключить</a>
                                <div class="dropdown-divider"></div>
-                               <a class="dropdown-item text-danger" href="#"><i class="fa fa-times" aria-hidden="true"></i> Удалить</a>
+                               <a class="dropdown-item text-danger" href="#"  id="del-product-btn"><i class="fa fa-times" aria-hidden="true" ></i> Удалить</a>
                            </div>
                        </div>
                    </td>
@@ -115,10 +115,10 @@
        </table>
        <hr>
        <div class="pull-right">
-           <button type="button" class="btn btn-success" data-toggle="modal" data-target=".add-product-modal">
+           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product-modal">
                <i class="fa fa-plus" aria-hidden="true"></i> Додбавить новый товар
            </button>
-           <div class="modal fade add-product-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+           <div class="modal fade " id="add-product-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                <div class="modal-dialog modal-md">
                    <div class="modal-content">
                        <div class="modal-header">
@@ -150,22 +150,21 @@
                                <div class="form-group row">
                                    <label for="characteristics" class="col-sm-4 col-form-label">Характеристики</label>
                                    <div class="col-sm-8">
-
+                                       <select name="characteristics[]" id="characteristics" multiple class="form-control">
                                            @{{#eachkeys defaults.characteristics}}
-                                           <label class="form-check-inline">
-                                               <input class="form-check-input" type="checkbox" name="characteristics[]" value="@{{this.value.id}}"> @{{this.value.value}}@{{this.value.units.unit}}.
-                                           </label>
+                                                <option value="@{{this.value.id}}">@{{this.value.value}}@{{this.value.units.unit}}.</option>
                                            @{{/eachkeys}}
+                                       </select>
                                    </div>
                                </div>
                                <div class="form-group row">
                                    <label for="characteristics" class="col-sm-4 col-form-label">Категории</label>
                                    <div class="col-sm-8">
-                                       @{{#eachkeys defaults.cats}}
-                                       <label class="form-check-inline">
-                                           <input class="form-check-input" type="checkbox" name="cats[]"  value="@{{this.value.id}}"> @{{this.value.title}}
-                                       </label>
-                                       @{{/eachkeys}}
+                                       <select name="categories[]" id="characteristics" multiple class="form-control">
+                                           @{{#eachkeys defaults.cats}}
+                                            <option value="@{{this.value.id}}">@{{this.value.title}}</option>
+                                           @{{/eachkeys}}
+                                       </select>
                                    </div>
                                </div>
                            </form>

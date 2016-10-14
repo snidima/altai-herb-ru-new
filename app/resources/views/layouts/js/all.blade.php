@@ -7,5 +7,5 @@
 
 <script src="{{ asset('js/Routes.js') }}"></script>
 <script src="{{ asset('js/Models.js') }}"></script>
-<script src="{{ asset('js/Views.js') }}"></script>
+<script src="{{ asset('js/Views.js.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
