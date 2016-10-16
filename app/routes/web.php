@@ -72,7 +72,7 @@ Route::get('/contacts', function(){
 
 
 
-Route::get('/test', 'ProductController@loloo')->middleware('isAdmin');
+
 
 
 
@@ -90,23 +90,39 @@ Route::group([ 'middleware' => 'isAdmin', 'prefix'=>'admin'], function()
     Route::group(['prefix'=>'api'], function()
     {
         Route::get('/products', function (){
-            $products = App\Product::first()
 
-                ->with(['categories'=>function($q){
-                    $q->orderBy('id','desc');
-                }])
+            $resp = array(
+                'msg' => null,
+                'data' => null,
+                'errors' => null
+            );
 
-                ->with(['characteristics'=>function($q){
-                    $q->with(['units'=>function($q){
-                        $q->where('slug','=', 'weight');
+            $code = 200;
+
+            try {
+
+                $products = App\Product::first()
+                    ->with(['categories'=>function($q){
+                        $q->orderBy('id','desc');
                     }])
+                    ->with(['characteristics'=>function($q){
+                        $q->with(['units'=>function($q){
+                            $q->where('slug','=', 'weight');
+                        }])
+                            ->orderBy('id','desc');
+                    }]);
+                $resp['data'] = $products->get()->toArray();
+                $resp['msg'] = 'ok';
 
-                        ->orderBy('id','desc');
-                }]);
+            } catch (Exception $e) {
+                $resp['errors'][] = array(
+                    'title' => 'Невозможно получить данные.',
+                    'msg' => $e->getMessage(),
+                );
+                $code = 500;
+            }
 
-                ;
-
-            return Response::json( $products->get()->toArray() );
+            return Response::json( $resp, $code );
         });
 
 
@@ -152,6 +168,8 @@ Route::group([ 'middleware' => 'isAdmin', 'prefix'=>'admin'], function()
             ] );
         });
 
+
+
     });
 
     Route::get('/add', function(){
@@ -170,4 +188,9 @@ Route::group([ 'middleware' => 'isAdmin', 'prefix'=>'admin'], function()
 
     });
 
+});
+
+
+Route::get('/material', function(){
+    return view('admin/prod');
 });

@@ -10,8 +10,20 @@
 
    <script id="products-table-2-tmp" type="text/x-handlebars-template">
 
-       <table class="table table-hover">
-           <thead class="thead-inverse">
+
+
+
+       @{{#messages}}
+       <div class="alert alert-warning alert-dismissible fade in" role="alert">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+           </button>
+           <strong>@{{title}}</strong><br>@{{msg}}
+       </div>
+       @{{/messages}}
+
+       <table class="table table-striped table-hover">
+           <thead>
            <tr>
                <th>ID</th>
                <th>Цена</th>
@@ -23,61 +35,58 @@
            </thead>
            <tbody>
 
-           @{{#eachkeys products}}
+           @{{#products as |product|}}
+
                <tr class="product-row" data-id="@{{this.value.id}}">
-                   <th scope="row">@{{this.value.id}}</th>
-                   <th scope="row">@{{this.value.price}}</th>
-                   <th scope="row">@{{this.value.name}}</th>
+                   <th scope="row">@{{product.id}}</th>
+                   <th scope="row">@{{product.price}}</th>
+                   <th scope="row">@{{product.name}}</th>
                  <td>
-                       @{{#eachkeys this.value.categories}}
-                           <span class="tag tag-default">@{{this.value.title}} <span class="tag tag-danger" data-toggle="modal" data-target=".del-cat-modal-@{{this.value.id}}"><i class="fa fa-times" aria-hidden="true"></i></span></span>
-                         <div class="modal fade del-cat-modal-@{{this.value.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                     <h4>
+                         @{{#product.categories as |category|}}
+
+
+                           <span class="label label-default">
+                               @{{category.title}}
+                               <span class="label label-danger" data-toggle="modal" data-target=".del-cat-modal-@{{category.id}}">
+                                   <i class="fa fa-times" aria-hidden="true"></i>
+                               </span>
+                           </span>&nbsp;
+
+                         <div class="modal fade del-cat-modal-@{{category.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                              <div class="modal-dialog modal-sm">
                                  <div class="modal-content">
-                                     <div class="modal-header">
-                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                             <span aria-hidden="true">&times;</span>
-                                         </button>
-                                         <h5 class="modal-title">@{{this.value.id}}: @{{this.value.title}}</h5>
-                                     </div>
                                      <div class="modal-body">
-                                         <select class="form-control">
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                         </select>
+                                         Удалить категорию <p><b>@{{category.title}}</b>?</p>
                                      </div>
                                      <div class="modal-footer">
                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                                         <button type="button" class="btn btn-danger">Удалить</button>
+                                         <button type="button" class="btn btn-danger" data-cat-id="@{{category.id}}" data-prod-id="@{{category.id}}">Удалить</button>
                                      </div>
                                  </div>
                              </div>
                          </div>
-                     @{{/eachkeys}}
-                       <span class="tag tag-success"  data-toggle="modal" data-target=".add-cat-modal-@{{this.value.id}}"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                         <div class="modal fade add-cat-modal-@{{this.value.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        @{{/product.categories}}
+                     </h4>
+                     <h4>
+                       <span class="label label-success"  data-toggle="modal" data-target=".add-cat-modal-@{{product.id}}">
+                           <i class="fa fa-plus" aria-hidden="true"></i>
+                       </span>
+                     </h4>
+                         <div class="modal fade add-cat-modal-@{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                              <div class="modal-dialog modal-md">
                                  <div class="modal-content">
                                      <div class="modal-header">
                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                              <span aria-hidden="true">&times;</span>
                                          </button>
-                                         <h5 class="modal-title ">Добавить категорию для @{{this.value.name}}</h5>
+                                         <h5 class="modal-title ">Добавить категорию для <b>@{{product.name}}</b></h5>
                                      </div>
                                      <div class="modal-body">
-                                         <select class="form-control">
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
-                                             <option>Large select</option>
+                                         <select class="selectpicker" multiple >
+                                             @{{#each ../defaults.cats }}
+                                                <option value="">@{{ title }}</option>
+                                             @{{/each}}
                                          </select>
                                      </div>
                                      <div class="modal-footer">
@@ -94,7 +103,7 @@
                               @{{this.value.value}}@{{this.value.units.unit}}. <span class="tag tag-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
                            </span>
                        @{{/eachkeys}}
-                       <span class="tag tag-success"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                       <span class="label label-success"><i class="fa fa-plus" aria-hidden="true"></i></span>
                    </td>
                    <td>
                        <div class="btn-group">
@@ -110,7 +119,7 @@
                        </div>
                    </td>
                </tr>
-           @{{/eachkeys}}
+           @{{/products}}
            </tbody>
        </table>
        <hr>

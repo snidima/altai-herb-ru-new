@@ -26,14 +26,22 @@ var ProductsCollection = Backbone.Collection.extend({
     initialize: function(){
         var self = this;
 
-        getProducts().done(function(data){
-            _.each(data, function( product ){
-                self.add( product );
+        getProducts()
+            .done(function(r){
+                _.each(r.data, function( product ){
+                    self.add( product );
+                });
+                console.group('ИНИЦИАЛИЗАЦИЯ ПРОДУКТОВ УСПЕХ');
+                console.log(self.toJSON());
+                console.groupEnd();
+
+            })
+            .fail(function(r){
+                messagesCollection.add( r.responseJSON.errors );
+                // setTimeout(function(){
+                //     messagesCollection.reset();
+                // }, 1000);
             });
-            console.group('ИНИЦИАЛИЗАЦИЯ ПРОДУКТОВ УСПЕХ');
-            console.log(self.toJSON());
-            console.groupEnd();
-        });
 
         this.listenTo(this, 'add', function(){
             console.log(this.toJSON());
@@ -43,6 +51,14 @@ var ProductsCollection = Backbone.Collection.extend({
 
 });
 
+var MessagesCollection = Backbone.Collection.extend({
+    initialize: function(){
+        this.on('add', function(e,data){
+            console.warn(data);
+        });
+    }
+
+});
 
 var DefaultValuesModel = Backbone.Model.extend({
     initialize: function(){

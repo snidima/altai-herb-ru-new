@@ -62,11 +62,13 @@
 var product = new ProductModel;
 var products = new ProductsCollection;
 var defaultValues = new DefaultValuesModel;
+var messagesCollection = new MessagesCollection;
 
 
 var productsTableView = new ProductsTableView({
     products: products,
-    default: defaultValues
+    default: defaultValues,
+    errors: messagesCollection
 });
 
 

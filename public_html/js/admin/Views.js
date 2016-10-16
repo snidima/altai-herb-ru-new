@@ -55,15 +55,18 @@ var ProductsTableView = Backbone.View.extend({
         _.bindAll(this, 'render');
         this.products = models.products;
         this.default = models.default;
+        this.errors = models.errors;
         this.products.on('all', this.render);
         this.default.on('all', this.render);
+        this.errors.on('all', this.render);
     },
 
     render: function() {
         var rendered = Handlebars.compile(this.template);
         this.$el.html( rendered({
             products: this.products.toJSON(),
-            defaults: this.default.toJSON()
+            defaults: this.default.toJSON(),
+            messages: this.errors.toJSON(),
         }) );
         return this;
     }
