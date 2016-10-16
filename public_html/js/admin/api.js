@@ -41,3 +41,15 @@ function delProduct( id ) {
         }
     });
 }
+
+
+function getProduct( id ) {
+
+    return $.ajax({
+        url: `admin/api/product/${id}`,
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+}

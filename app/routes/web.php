@@ -141,6 +141,20 @@ Route::group([ 'middleware' => 'isAdmin', 'prefix'=>'admin'], function()
             return Response::json( ['ok'] );
         });
 
+        Route::get('/product/{id}', function ($id){
+            $prod = \App\Product
+                ::with(['categories'=>function($q){
+                    $q->orderBy('id','desc');
+                }])
+                    ->with(['characteristics'=>function($q){
+                        $q->with(['units'=>function($q){
+                            $q->where('slug','=', 'weight');
+                        }])
+                            ->orderBy('id','desc');
+                    }]);
+            return Response::json( $prod->where('id','=',$id)->get()->first()->toArray() );
+        });
+
         Route::delete('/product', function ( \Illuminate\Http\Request $request){
             $prod = \App\Product::find($request->id);
             $prod->categories()->detach();

@@ -4,35 +4,13 @@ var ProductsTableView = Backbone.View.extend({
     template: $('#products-table-2-tmp').html(),
 
     events: {
-        // "click .product-row:not(.table-active)": "addProduct",
-        // "click .product-row.table-active": "delProduct",
-        // "click .product-row.table-active": "delProduct",
         "click #add-new-product-btn": "addProduct",
-        "click #del-product-btn": "delProduct",
+        "click .edit-product": "editProduct",
     },
 
-
-
-    selectProduct: function(e){
-        if ( $(e.target)[0].nodeName != 'TD' ) return;
-        var id = $(e.currentTarget).attr('data-id');
-        $(e.currentTarget).addClass('table-active');
-        var cur = selectedProducts.get('ids');
-        if ( cur === undefined ) cur = [];
-        cur.push(id);
-        selectedProducts.set({
-            ids: cur
-        });
-    },
-    unselectProduct: function (e) {
-        if ( $(e.target)[0].nodeName != 'TD' ) return;
-        var id = $(e.currentTarget).attr('data-id');
-        $(e.currentTarget).removeClass('table-active');
-        var cur = selectedProducts.get('ids');
-        cur = _.without(cur, id);
-        selectedProducts.set({
-            ids: cur
-        });
+    editProduct: function(e){
+        id = $(e.currentTarget).attr('data-id');
+        workspace.navigate(`product/${id}`, {trigger: true});
     },
 
     addProduct: function(){
@@ -43,30 +21,54 @@ var ProductsTableView = Backbone.View.extend({
         });
     },
 
-    delProduct: function(e){
-        var id = $(e.target).parents('.product-row').attr('data-id');
-        this.products.remove(id);
-        delProduct( id ).done(function(r){
-            console.log(r);
-        });
-    },
+
 
     initialize: function(models) {
         _.bindAll(this, 'render');
         this.products = models.products;
-        this.default = models.default;
-        this.errors = models.errors;
         this.products.on('all', this.render);
-        this.default.on('all', this.render);
-        this.errors.on('all', this.render);
+        this.render();
     },
 
     render: function() {
         var rendered = Handlebars.compile(this.template);
         this.$el.html( rendered({
             products: this.products.toJSON(),
-            defaults: this.default.toJSON(),
-            messages: this.errors.toJSON(),
+        }) );
+        return this;
+    }
+
+});
+
+
+
+var ProductView = Backbone.View.extend({
+
+    el: '#products-table',
+    template: $('#product-edit-tmp').html(),
+
+    events: {
+
+    },
+
+
+
+    initialize: function(data) {
+        this.id = data.id;
+        this.product = data.product;
+        this.render();
+        $(document).ready(function(){
+            $('.carousel').carousel({
+                no_wrap: true
+            });
+        });
+    },
+
+    render: function() {
+        var rendered = Handlebars.compile(this.template);
+        this.$el.html( rendered({
+            id: this.id,
+            product: this.product.toJSON()
         }) );
         return this;
     }

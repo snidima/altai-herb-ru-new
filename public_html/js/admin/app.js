@@ -1,79 +1,76 @@
-// var productsTableModel = new ProductsTableModel;
-// var selectedProducts = new SelectedProducts;
-// var defaultValues = new DefaultValues;
-//
-// var productsTableView = new ProductsTableView({
-//     products: productsTableModel,
-//     default: defaultValues
-// });
-//
-//
-// var loadProduct = function(){
-//     $.ajax({
-//         type: "GET",
-//         url: "admin/api/products",
-//         data: "",
-//         dataType: 'json',
-//         success: function(res) {
-//             productsTableModel.set(res);
-//
-//         },
-//         error: function (e) {
-//             console.error(e);
-//         }
-//     });
-// };
-//
-// var loadDeffaultValues = function(){
-//     $.ajax({
-//         type: "GET",
-//         url: "admin/api/characteristics",
-//         data: "",
-//         dataType: 'json',
-//         success: function(res) {
-//             defaultValues.set(res);
-//         },
-//         error: function () {
-//             defaultValues.set(false);
-//         }
-//     });
-// };
+var Workspace = Backbone.Router.extend({
+
+    routes: {
+        ""       :         "products",
+        "product/:id":   "product",
+        "products":        "products",
+    },
+
+    product: function(id) {
+
+        getProduct(id).done(function(r){
+            var product = new ProductModel;
+            product.set(r);
+            var productView = new ProductView({
+                id:id,
+                product: product
+            });
+            console.log(product.toJSON());
+        });
 
 
-// $('#refreshProducts').click(function(){
-//     loadProduct();
-// });
+    },
+    products: function() {
+        // productsTableView.render();
+        var products = new ProductsCollection;
+
+        getProducts()
+            .done(function(r){
+                _.each(r.data, function( product ){
+                    products.add( product );
+                });
+                console.group('ИНИЦИАЛИЗАЦИЯ ПРОДУКТОВ УСПЕХ');
+                console.log(products.toJSON());
+                console.groupEnd();
+
+                var productsTableView = new ProductsTableView({
+                    products: products
+                });
+
+            });
 
 
-// loadProduct();
-// loadDeffaultValues();
+    },
 
 
 
-
-
-
-
-
-
-
-
-
-var product = new ProductModel;
-var products = new ProductsCollection;
-var defaultValues = new DefaultValuesModel;
-var messagesCollection = new MessagesCollection;
-
-
-var productsTableView = new ProductsTableView({
-    products: products,
-    default: defaultValues,
-    errors: messagesCollection
 });
 
 
 
 
+
+
+
+
+
+
+
+
+// var product = new ProductModel;
+// var products = new ProductsCollection;
+// var defaultValues = new DefaultValuesModel;
+// var messagesCollection = new MessagesCollection;
+
+
+
+
+
+
+
+
+var workspace = new Workspace;
+Backbone.history.start();
 
 
 
