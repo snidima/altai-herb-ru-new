@@ -8,6 +8,7 @@
 
 
     <script id="product-edit-tmp" type="text/x-handlebars-template">
+        <h1>@{{ product.name }}</h1>
         <nav style="margin: 20px 0">
             <div class="nav-wrapper deep-purple lighten-3">
                 <div class="col s12">
@@ -174,66 +175,46 @@
     </script>
 
     <script id="products-table-2-tmp" type="text/x-handlebars-template">
-
-
-        <table class="bordered striped highlight responsive-table">
-            <thead>
-            <tr>
-                {{--<th data-field="id">ID</th>--}}
-                {{--<th data-field="id">Активность</th>--}}
-                {{--<th data-field="id">Активность</th>--}}
-                <th data-field="name">Цена</th>
-                <th data-field="price">Название</th>
-                {{--<th data-field="price">Категории</th>--}}
-                {{--<th data-field="price">Характеристики</th>--}}
-                <th data-field="price">Действия</th>
-            </tr>
-            </thead>
-            <tbody>
+        <h2>Товары</h2>
+        <div class="row">
             @{{#products as |product|}}
-            <tr>
-                {{--<td><b>@{{product.id}}</b></td>--}}
-                {{--<td>--}}
-                {{--<p>--}}
-                {{--<input type="checkbox" class="filled-in" id="product-check-@{{product.id}}" />--}}
-                {{--<label for="product-check-@{{product.id}}"></label>--}}
-                {{--</p>--}}
-                {{--</td>--}}
-                {{--<td>--}}
-                {{--<div class="switch ">--}}
-                {{--<label>--}}
-                {{--<input type="checkbox" checked>--}}
-                {{--<span class="lever"></span>--}}
-                {{--</label>--}}
-                {{--</div>--}}
-                {{--</td>--}}
-                <td><b>@{{product.name}}</b></td>
-                <td>@{{product.price}}</td>
-                {{--<td>--}}
-                {{--@{{#product.categories as |category|}}--}}
-                {{--<div class="chip">--}}
-                {{--@{{category.title}}--}}
-                {{--<i class="close material-icons">close</i>--}}
-                {{--</div>--}}
-                {{--@{{/product.categories}}--}}
-                {{--</td>--}}
-                {{--<td>--}}
-                {{--@{{#product.characteristics as |characteristic|}}--}}
-                {{--<div class="chip">--}}
-                {{--@{{ characteristic.value }}@{{ characteristic.units.unit }}.--}}
-                {{--<i class="close material-icons">close</i>--}}
-                {{--</div>--}}
-                {{--@{{/product.characteristics}}--}}
-                {{--</td>--}}
-                <td>
-                    <span class='waves-effect waves-light btn blue lighten-2 edit-product' data-id="@{{product.id}}">
-                        <i class="material-icons ">settings</i>
-                    </span>
-                </td>
-            </tr>
+            <div class="col s12 m6 l3">
+                <div class="card large">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="http://prodgid.ru/wp-content/uploads/2014/12/%D0%9C%D1%8F%D1%82%D0%B0-%D0%BF%D0%B5%D1%80%D0%B5%D1%87%D0%BD%D0%B0%D1%8F-2.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">
+                            @{{ product.name }}
+                            {{--<i class="material-icons right">more_vert</i>--}}
+                        </span>
+                        <p><a href="#">Открыть на сайте</a></p>
+                        <p class="grey-text" style="font-size: .8rem;">@{{ product.desc }}</p>
+
+                    </div>
+                    <div class="card-action">
+                       <div style="display: flex; align-items: center; justify-content: space-between">
+                            <a href="#product/@{{ product.id }}">Редактировать</a>
+                            <a class="red-text" href="#product/@{{ product.id }}">Удалить</a>
+                       </div>
+
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><b>@{{ product.name }}</b><i class="material-icons right">close</i></span>
+                        <blockquote>
+                                    <h6><u>Описание</u></h6>
+                                    @{{ product.desc }}
+                        </blockquote>
+                        <blockquote>
+                            <h6><u>Цена</u></h6>
+                            @{{ product.price }} руб.
+                        </blockquote>
+                    </div>
+
+                </div>
+            </div>
             @{{/products}}
-            </tbody>
-        </table>
+        </div>
 
 
         <div style="text-align: right; padding-top: 15px">
